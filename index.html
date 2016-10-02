@@ -25,23 +25,8 @@
               $('#messages').empty();
               msgCount = 0;
           }
-          var commandResponse = checkCommand(msg);
-          if (commandResponse) {
-              $('#messages').append($('<li>').text(commandResponse));
-          } else {
-              $('#messages').append($('<li>').text(msg));
-          }
+          $('#messages').append($('<li>').text(msg));
       });
-
-        function checkCommand(msg) {
-            switch (msg) {
-                case '/time':
-                    return new Date();
-                    break;
-                default:
-                    return null;
-            }
-        }
     </script>
   </body>
 </html>

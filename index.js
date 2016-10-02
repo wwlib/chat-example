@@ -12,10 +12,26 @@ app.get('/css/main.css', function(req, res){
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+    var commandResponse = checkCommand(msg);
+    if (commandResponse) {
+        io.emit('chat message', commandResponse);
+    } else {
+        io.emit('chat message', msg);
+    }
   });
 });
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
+
+function checkCommand(msg) {
+    switch (msg) {
+        case '/time':
+            return new Date();
+            break;
+        default:
+            return null;
+    }
+}
